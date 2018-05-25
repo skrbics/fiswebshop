@@ -1,3 +1,13 @@
+<?php
+	session_start();
+	//initialize cart if not set or is unset
+	if(!isset($_SESSION['cart'])){
+		$_SESSION['cart'] = array();
+	}
+
+	//unset qunatity
+	unset($_SESSION['qty_array']);
+?>
 <!doctype html>
 <html lang="en">
   <head>
