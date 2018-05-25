@@ -53,7 +53,42 @@
 	    </div>
 	  </div>
 	</nav>
-	
+  <?php
+  $conn = new mysqli('localhost', 'fisuser', 'fis', 'fisexample');
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+		$sql = "SELECT * FROM products";
+		$query = $conn->query($sql);
+		$inc = 4;
+		while($row = $query->fetch_assoc()){
+			$inc = ($inc == 4) ? 1 : $inc + 1;
+			if($inc == 1) echo "<div class='row text-center'>";
+			?>
+			<div class="col-sm-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row product_image">
+							<img src="<?php echo $row['photo'] ?>" width="80%" height="auto">
+						</div>
+						<div class="row product_name">
+							<h4><?php echo $row['name']; ?></h4>
+						</div>
+						<div class="row product_footer">
+							<p class="pull-left"><b><?php echo $row['price']; ?></b></p>
+							<span class="pull-right"><a href="add_cart.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Cart</a></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+		if($inc == 1) echo "<div></div><div></div><div></div></div>";
+		if($inc == 2) echo "<div></div><div></div></div>";
+		if($inc == 3) echo "<div></div></div>";
+
+		//end product row
+	?>
 </div>
 </body>
 </html>
