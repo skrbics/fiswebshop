@@ -53,7 +53,20 @@
 	    </div>
 	  </div>
 	</nav>
+
   <?php
+  if(isset($_SESSION['message'])){
+    ?>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-6">
+        <div class="alert alert-info text-center">
+          <?php echo $_SESSION['message']; ?>
+        </div>
+      </div>
+    </div>
+    <?php
+    unset($_SESSION['message']);
+  }
   $conn = new mysqli('localhost', 'fisuser', 'fis', 'fisexample');
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
